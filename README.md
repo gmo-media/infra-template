@@ -2,7 +2,7 @@
 
 A template to get you started with OpenTofu (and AWS / EKS).
 
-See also: [manifest-template](https://github.com/gmo-media/manifest-template)
+See also: [tofu-actions](https://github.com/gmo-media/tofu-actions), [manifest-template](https://github.com/gmo-media/manifest-template)
 
 ## Directory structure
 

@@ -1,0 +1,31 @@
+# Manually force-unlock state
+name: Force unlock
+run-name: Force unlock (${{ inputs.dir }})
+
+on:
+  workflow_dispatch:
+    inputs:
+      dir:
+        description: Directory to run in
+        type: choice
+        required: true
+        default: dev
+        options:
+          - dev
+      lock-id:
+        description: Lock ID (see error message of OpenTofu)
+        type: string
+        required: true
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  force-unlock:
+    uses: gmo-media/tofu-actions/.github/workflows/quickstart-force-unlock.yaml@v4
+    with:
+      auth-mode: aws-oidc
+      aws-role: arn:aws:iam::123456789012:role/tofu-plan
+      dir: ${{ inputs.dir }}
+      lock-id: ${{ inputs.lock-id }}

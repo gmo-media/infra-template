@@ -1,0 +1,20 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    'config:recommended',
+    ':disableRateLimiting',
+    ':dependencyDashboard',
+    ':semanticCommits',
+    'local>gmo-media/infra-template//.github/renovate/ignore.json5',
+    'local>gmo-media/infra-template//.github/renovate/minimum-release-age.json5',
+    'local>gmo-media/infra-template//.github/renovate/regex-manager.json5'
+  ],
+  platformAutomerge: true,
+  automergeType: 'pr',
+  dependencyDashboardTitle: 'Renovate Dashboard 🤖',
+  suppressNotifications: [
+    'prIgnoreNotification'
+  ],
+  branchConcurrentLimit: 0,
+  prConcurrentLimit: 0,
+}

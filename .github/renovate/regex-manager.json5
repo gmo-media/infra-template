@@ -1,0 +1,98 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "packageRules": [
+    {
+      "matchDatasources": ["aws-eks-addon"],
+      "overrideDepName": "{{replace '.*\"addonName\":\"([^\"]+)\".*' '$1' depName}}"
+    }
+  ],
+  "customManagers": [
+    {
+      "description": "Process custom dependencies",
+      "fileMatch": [
+        ".+"
+      ],
+      "matchStrings": [
+        // Example: (github-releases) version: "v1.27.3"
+        "# renovate:general datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\n.*?\"(?<currentValue>.*)\"\n",
+        // Example: (helm) targetRevision: "6.11.5"
+        "# renovate:general datasource=(?<datasource>\\S+) depName=(?<depName>\\S+) registryUrl=(?<registryUrl>\\S+)\n.*?\"(?<currentValue>.*)\"\n",
+      ],
+      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
+    },
+    {
+      "description": "eks versioning",
+      "fileMatch": [
+        ".+"
+      ],
+      "matchStrings": [
+        // Example: version: "1.33"
+        "# renovate:eks\n.*?\"(?<currentValue>.*)\"\n",
+      ],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "aws/eks-distro",
+      // Example: v1-33-eks-10 -> 1-33
+      "extractVersionTemplate": "^v(?<version>\\d+-\\d+)-eks-.*",
+      "versioningTemplate": "regex:^(?<major>\\d+)-(?<minor>\\d+)$",
+    },
+    // https://docs.renovatebot.com/modules/datasource/aws-eks-addon/
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/.*\\.tf/"],
+      "matchStrings": [
+        // Example:
+        // # ...:eksAddonsFilter={"addonName":"vpc-cni"}
+        // default = "v1.18.1-eksbuild.3"
+        ".*# renovate:eksAddonsFilter=(?<packageName>.*?)\n.*?[a-zA-Z0-9-_:]*[ ]*?[:|=][ ]*?[\"|']?(?<currentValue>[a-zA-Z0-9-_.]+)[\"|']?.*"
+      ],
+      "datasourceTemplate": "aws-eks-addon",
+      "versioningTemplate": "aws-eks-addon",
+    },
+    {
+      "description": "OCI image dependencies (full)",
+      "fileMatch": [
+        ".+"
+      ],
+      "matchStrings": [
+        // Example:
+        // fooImage: "ghcr.io/motoki317/k8s-csi-s3:0.40.8-p1"
+        "# renovate:image-full\n.*?\"(?<registryUrl>[^\\s/]+)/(?<depName>[^\\s:]+):(?<currentValue>.+)\"\n",
+      ],
+      "datasourceTemplate": "docker",
+      "registryUrlTemplate": "https://{{{registryUrl}}}",
+      "depNameTemplate": "{{{registryUrl}}}/{{{depName}}}",
+    },
+    {
+      "description": "OCI image dependencies (tag)",
+      "fileMatch": [
+        ".+"
+      ],
+      "matchStrings": [
+        // Example:
+        // # ... imageName=ghcr.io/traptitech/traq
+        // fooTag: "0.35.5-p1"
+        "# renovate:image-tag imageName=(?<registryUrl>[^\\s/]+)/(?<depName>\\S+)\n.*?\"(?<currentValue>.+)\"\n",
+      ],
+      "datasourceTemplate": "docker",
+      "registryUrlTemplate": "https://{{{registryUrl}}}",
+      "depNameTemplate": "{{{registryUrl}}}/{{{depName}}}"
+    },
+    {
+      "description": "GitHub URL dependencies",
+      "fileMatch": [
+        ".+"
+      ],
+      "matchStrings": [
+        // Example: kustomize build https://github.com/argoproj/argo-cd//manifests/crds?ref=v2.7.6 | kubectl create -f -
+        "# renovate:github-url\n.*?https://github\\.com/(?<depName>[^/]+/[^/]+)//.*?\\?ref=(?<currentValue>\\S+)",
+        // Example: - https://raw.githubusercontent.com/traefik/traefik/v2.10.3/docs/content/reference/dynamic-configuration/kubernetes-crd-definition-v1.yml
+        "# renovate:github-url\n.*?https://raw\\.githubusercontent\\.com/(?<depName>[^/]+/[^/]+)/(?<currentValue>[^/]+)",
+        // Example: - https://github.com/rancher/system-upgrade-controller/releases/download/v0.11.0/crd.yaml
+        "# renovate:github-url\n.*?https://github\\.com/(?<depName>[^/]+/[^/]+)/releases/download/(?<currentValue>[^/]+)",
+        // Example: wget https://github.com/argoproj/argo-cd/archive/v2.12.4.zip
+        "# renovate:github-url\n.*?https://github\\.com/(?<depName>[^/]+/[^/]+)/archive/(?<currentValue>[^/]+)\.zip",
+      ],
+      "datasourceTemplate": "github-releases",
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+# Run drift checks manually or on cron
+name: Drift Check
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+
+permissions:
+  contents: write
+  actions: read
+  pull-requests: write
+  id-token: write
+
+jobs:
+  drift-check:
+    uses: gmo-media/tofu-actions/.github/workflows/quickstart-drift-check.yaml@v4
+    with:
+      auth-mode: aws-oidc
+      aws-role: arn:aws:iam::123456789012:role/tofu-plan
+    secrets:
+      drift-notify-webhook: "https://hooks.slack.com/services/..."

@@ -1,0 +1,26 @@
+# Plan manually
+name: Plan
+run-name: Plan (${{ inputs.dir }})
+
+on:
+  workflow_dispatch:
+    inputs:
+      dir:
+        description: Directory to run in
+        type: choice
+        required: true
+        default: dev
+        options:
+          - dev
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  plan:
+    uses: gmo-media/tofu-actions/.github/workflows/quickstart-plan.yaml@v4
+    with:
+      auth-mode: aws-oidc
+      aws-role: arn:aws:iam::123456789012:role/tofu-plan
+      dir: ${{ inputs.dir }}

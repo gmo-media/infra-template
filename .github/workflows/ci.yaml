@@ -1,0 +1,22 @@
+# Plan and apply on pull requests
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+permissions:
+  contents: read
+  actions: read
+  pull-requests: write
+  id-token: write
+
+jobs:
+  ci:
+    uses: gmo-media/tofu-actions/.github/workflows/quickstart-ci.yaml@v4
+    with:
+      auth-mode: aws-oidc
+      aws-apply-role: arn:aws:iam::123456789012:role/tofu-apply
+      aws-plan-role: arn:aws:iam::123456789012:role/tofu-plan

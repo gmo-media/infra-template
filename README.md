@@ -11,6 +11,8 @@ A template to get you started with OpenTofu (and AWS / EKS).
     - `vpc*.tf`: A dual-stack (IPv4 and IPv6) VPC setup.
     - `eks*.tf`: A basic EKS cluster setup.
 
+See also: [manifest-template](https://github.com/gmo-media/manifest-template)
+
 ## Setup
 
 Create a repository from this template, and rewrite wherever needed.

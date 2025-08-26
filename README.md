@@ -33,4 +33,4 @@ There are several ways to self-host and run Renovate processes:
 
 - (probably the easiest) GitHub Actions using [renovatebot/github-action](https://github.com/renovatebot/github-action).
     - You might want to check out [motoki317/manifest](https://github.com/motoki317/manifest/tree/master/.github) for workflow examples.
-- K8s CronJob: See [manifest-template/dev/renovate](https://github.com/gmo-media/manifest-template/tree/master/dev/renovate).
+- K8s CronJob: See [manifest-template/dev/renovate](https://github.com/gmo-media/manifest-template/tree/main/dev/renovate).

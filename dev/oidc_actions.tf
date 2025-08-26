@@ -1,6 +1,6 @@
 locals {
   repository  = "gmo-media/infra-template"
-  main_branch = "master"
+  main_branch = "main"
 }
 
 # ---- GitHub Actions OIDC Provider

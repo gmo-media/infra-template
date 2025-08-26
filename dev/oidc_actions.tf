@@ -1,4 +1,5 @@
 locals {
+  # Replace with your repository name
   repository  = "gmo-media/infra-template"
   main_branch = "main"
 }

@@ -38,7 +38,7 @@ resource "aws_iam_role_policy_attachment" "eks-access" {
 #
 # Add the following to ~/.aws/config.
 #   [profile eks-access]
-#   role_arn       = arn:aws:iam::123456789012:role/eks-access
+#   role_arn       = arn:aws:iam::<aws-account-id>:role/eks-access
 #   source_profile = your-user-profile
 #
 # Then run `aws eks --region ap-northeast-1 update-kubeconfig --name dev --profile eks-access` to access cluster locally.

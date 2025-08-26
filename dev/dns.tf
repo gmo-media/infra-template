@@ -1,6 +1,6 @@
 # Created via aws-load-balancer-controller inside the cluster
 # data "aws_alb" "example" {
-#   arn = "arn:aws:elasticloadbalancing:ap-northeast-1:123456789012:loadbalancer/app/k8s-dev-abcdef/abcdef"
+#   arn = "arn:aws:elasticloadbalancing:ap-northeast-1:<aws-account-id>:loadbalancer/app/k8s-dev-abcdef/abcdef"
 # }
 
 # data "aws_route53_zone" "example-com" {

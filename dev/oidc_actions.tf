@@ -59,7 +59,7 @@ data "aws_iam_policy_document" "tofu-plan-trust" {
   #
   # Then add the following to ~/.aws/config, and use `aws --profile tofu-plan`.
   #   [profile tofu-plan]
-  #   role_arn       = arn:aws:iam::123456789012:role/tofu-plan
+  #   role_arn       = arn:aws:iam::<aws-account-id>:role/tofu-plan
   #   source_profile = your-user-profile
   statement {
     effect = "Allow"

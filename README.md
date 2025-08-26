@@ -17,7 +17,7 @@ See also: [manifest-template](https://github.com/gmo-media/manifest-template)
 
 Create a repository from this template, and rewrite wherever needed.
 
-- `./.github/workflows`: After applying `oidc_actions.tf`, replace `123456789012` with your AWS account ID.
+- `./.github/workflows`: After applying `oidc_actions.tf`, replace `<aws-account-id>` with your AWS account ID.
 
 ### Renovate configuration
 

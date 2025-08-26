@@ -26,6 +26,6 @@ jobs:
     uses: gmo-media/tofu-actions/.github/workflows/quickstart-force-unlock.yaml@v4
     with:
       auth-mode: aws-oidc
-      aws-role: arn:aws:iam::123456789012:role/tofu-plan
+      aws-role: arn:aws:iam::<aws-account-id>:role/tofu-plan
       dir: ${{ inputs.dir }}
       lock-id: ${{ inputs.lock-id }}

@@ -27,6 +27,6 @@ jobs:
     uses: gmo-media/tofu-actions/.github/workflows/quickstart-apply.yaml@v4
     with:
       auth-mode: aws-oidc
-      aws-role: arn:aws:iam::123456789012:role/tofu-apply
+      aws-role: arn:aws:iam::<aws-account-id>:role/tofu-apply
       dir: ${{ inputs.dir }}
       run-id: ${{ inputs.run-id }}

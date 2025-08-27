@@ -7,24 +7,23 @@ module "karpenter" {
   # Name needs to match role name passed to the EC2NodeClass
   node_iam_role_use_name_prefix = false
   node_iam_role_name            = "karpenter-${local.name}-node"
+  node_iam_role_additional_policies = {
+    AmazonSSMManagedInstanceCore = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+    ECRAccess                    = aws_iam_policy.ecr-full-access.arn
+  }
 
   iam_policy_use_name_prefix = false
   iam_policy_name            = "KarpenterController-${local.name}"
   iam_role_use_name_prefix   = false
   iam_role_name              = "KarpenterController-${local.name}"
+  iam_role_source_assume_policy_documents = [
+    # Use IRSA instead
+    data.aws_iam_policy_document.karpenter-assume-role.json,
+  ]
 
   # NOTE: Pod identities cannot be used in Fargate nodes
   # https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html
   create_pod_identity_association = false
-  # Use IRSA instead
-  iam_role_source_assume_policy_documents = [
-    data.aws_iam_policy_document.karpenter-assume-role.json,
-  ]
-
-  # Used to attach additional IAM policies to the Karpenter node IAM role
-  node_iam_role_additional_policies = {
-    AmazonSSMManagedInstanceCore = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
-  }
 }
 
 data "aws_iam_policy_document" "karpenter-assume-role" {

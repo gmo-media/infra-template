@@ -8,7 +8,7 @@
 # }
 
 locals {
-  alb-hosts-intra = [
+  alb-hosts = [
     # Add your hosts here to connect them to ALB
     # "cd",
     # "whoami",
@@ -16,8 +16,8 @@ locals {
   ]
 }
 
-# resource "aws_route53_record" "eks-alb-intra" {
-#   for_each = toset(local.alb-hosts-intra)
+# resource "aws_route53_record" "eks-alb" {
+#   for_each = toset(local.alb-hosts)
 #
 #   zone_id = data.aws_route53_zone.example-com.zone_id
 #   name    = each.key
@@ -29,8 +29,8 @@ locals {
 #   }
 # }
 #
-# resource "aws_route53_record" "eks-alb-intra-v6" {
-#   for_each = toset(local.alb-hosts-intra)
+# resource "aws_route53_record" "eks-alb-v6" {
+#   for_each = toset(local.alb-hosts)
 #
 #   zone_id = data.aws_route53_zone.example-com.zone_id
 #   name    = each.key

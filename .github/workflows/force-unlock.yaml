@@ -11,6 +11,7 @@ on:
         required: true
         default: dev
         options:
+          - common
           - dev
       lock-id:
         description: Lock ID (see error message of OpenTofu)

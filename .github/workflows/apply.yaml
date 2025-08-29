@@ -11,6 +11,7 @@ on:
         required: true
         default: dev
         options:
+          - common
           - dev
       run-id:
         description: Actions run ID where plan was generated

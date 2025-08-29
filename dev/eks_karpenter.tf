@@ -9,7 +9,7 @@ module "karpenter" {
   node_iam_role_name            = "karpenter-${local.name}-node"
   node_iam_role_additional_policies = {
     AmazonSSMManagedInstanceCore = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
-    ECRAccess                    = aws_iam_policy.ecr-full-access.arn
+    ECRAccess                    = data.aws_iam_policy.ecr-full-access.arn
   }
 
   iam_policy_use_name_prefix = false
@@ -24,6 +24,10 @@ module "karpenter" {
   # NOTE: Pod identities cannot be used in Fargate nodes
   # https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html
   create_pod_identity_association = false
+}
+
+data "aws_iam_policy" "ecr-full-access" {
+  name = "ecr-full-access"
 }
 
 data "aws_iam_policy_document" "karpenter-assume-role" {
@@ -49,9 +53,4 @@ data "aws_iam_policy_document" "karpenter-assume-role" {
       values   = ["system:serviceaccount:karpenter:karpenter"]
     }
   }
-}
-
-# For Karpenter to create spot instances
-resource "aws_iam_service_linked_role" "spot" {
-  aws_service_name = "spot.amazonaws.com"
 }

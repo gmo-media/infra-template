@@ -9,9 +9,10 @@ See also: [tofu-actions](https://github.com/gmo-media/tofu-actions), [manifest-t
 - `./.github/workflows`: Set of basic workflows from [tofu-actions](https://github.com/gmo-media/tofu-actions).
     - `./.github/tofu-actions-config.js`: Configuration for tofu-actions.
 - `./.github/renovate.json5`, `./.github/renovate/*`: Renovate configurations.
-- `./dev`: Contains basic setup for dual-stack VPC, OIDC definitions, and an EKS cluster.
+- `./common`: Contains common resources like IAM Roles for a basic EKS setup.
     - `main.tf`: Metadata (backend, providers, and variables)
     - `oidc_actions.tf`: OIDC provider and roles for GitHub Actions in this repository.
+- `./dev`: Contains basic setup for a dual-stack VPC and an EKS cluster.
     - `vpc*.tf`: A dual-stack (IPv4 and IPv6) VPC setup.
     - `eks*.tf`: A basic EKS cluster setup.
 

@@ -25,7 +25,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "victoria-logs-archive" {
 
 resource "aws_eks_pod_identity_association" "victoria-logs" {
   cluster_name    = module.eks.cluster_name
-  role_arn        = aws_iam_role.eks-lbc.arn
+  role_arn        = aws_iam_role.victoria-logs.arn
   namespace       = "victoria-logs"
   service_account = "victoria-logs"
 }

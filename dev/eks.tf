@@ -31,7 +31,7 @@ resource "aws_eks_addon" "kube-proxy" {
   cluster_name = module.eks.cluster_name
   addon_name   = "kube-proxy"
   # renovate:eksAddonsFilter={"region":"ap-northeast-1","addonName":"kube-proxy"}
-  addon_version = "v1.33.3-eksbuild.4"
+  addon_version = "v1.33.3-eksbuild.6"
 }
 
 resource "aws_eks_addon" "eks-pod-identity-agent" {

@@ -52,7 +52,7 @@ resource "aws_eks_addon" "coredns" {
   cluster_name = module.eks.cluster_name
   addon_name   = "coredns"
   # renovate:eksAddonsFilter={"region":"ap-northeast-1","addonName":"coredns"}
-  addon_version = "v1.12.2-eksbuild.4"
+  addon_version = "v1.12.3-eksbuild.1"
 
   depends_on = [aws_eks_fargate_profile.coredns]
 }

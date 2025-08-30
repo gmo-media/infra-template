@@ -45,7 +45,7 @@ resource "aws_eks_addon" "vpc-cni" {
   cluster_name = module.eks.cluster_name
   addon_name   = "vpc-cni"
   # renovate:eksAddonsFilter={"region":"ap-northeast-1","addonName":"vpc-cni"}
-  addon_version = "v1.20.1-eksbuild.1"
+  addon_version = "v1.20.1-eksbuild.3"
 }
 
 resource "aws_eks_addon" "coredns" {

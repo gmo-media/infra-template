@@ -30,28 +30,28 @@ data "aws_iam_role" "tofu-apply" {
 resource "aws_eks_addon" "kube-proxy" {
   cluster_name = module.eks.cluster_name
   addon_name   = "kube-proxy"
-  # renovate:eksAddonsFilter={"region":"ap-northeast-1","addonName":"kube-proxy"}
+  # renovate:eksAddonsFilter={"region":"ap-northeast-1","default":true,"addonName":"kube-proxy"}
   addon_version = "v1.33.3-eksbuild.6"
 }
 
 resource "aws_eks_addon" "eks-pod-identity-agent" {
   cluster_name = module.eks.cluster_name
   addon_name   = "eks-pod-identity-agent"
-  # renovate:eksAddonsFilter={"region":"ap-northeast-1","addonName":"eks-pod-identity-agent"}
+  # renovate:eksAddonsFilter={"region":"ap-northeast-1","default":true,"addonName":"eks-pod-identity-agent"}
   addon_version = "v1.3.8-eksbuild.2"
 }
 
 resource "aws_eks_addon" "vpc-cni" {
   cluster_name = module.eks.cluster_name
   addon_name   = "vpc-cni"
-  # renovate:eksAddonsFilter={"region":"ap-northeast-1","addonName":"vpc-cni"}
+  # renovate:eksAddonsFilter={"region":"ap-northeast-1","default":true,"addonName":"vpc-cni"}
   addon_version = "v1.20.1-eksbuild.3"
 }
 
 resource "aws_eks_addon" "coredns" {
   cluster_name = module.eks.cluster_name
   addon_name   = "coredns"
-  # renovate:eksAddonsFilter={"region":"ap-northeast-1","addonName":"coredns"}
+  # renovate:eksAddonsFilter={"region":"ap-northeast-1","default":true,"addonName":"coredns"}
   addon_version = "v1.12.3-eksbuild.1"
 
   depends_on = [aws_eks_fargate_profile.coredns]

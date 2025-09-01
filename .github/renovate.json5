@@ -5,6 +5,7 @@
     ':disableRateLimiting',
     ':dependencyDashboard',
     ':semanticCommits',
+    'local>gmo-media/infra-template//.github/renovate/branch-prefix.json5',
     'local>gmo-media/infra-template//.github/renovate/ignore.json5',
     'local>gmo-media/infra-template//.github/renovate/minimum-release-age.json5',
     'local>gmo-media/infra-template//.github/renovate/regex-manager.json5'

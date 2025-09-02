@@ -1,18 +1,7 @@
 # ---- IAM Role
 resource "aws_iam_role" "eks-opencost" {
   name               = "eks-opencost"
-  assume_role_policy = data.aws_iam_policy_document.eks-opencost.json
-}
-
-data "aws_iam_policy_document" "eks-opencost" {
-  statement {
-    effect = "Allow"
-    principals {
-      type        = "Service"
-      identifiers = ["pods.eks.amazonaws.com"]
-    }
-    actions = ["sts:AssumeRole", "sts:TagSession"]
-  }
+  assume_role_policy = data.aws_iam_policy_document.eks-pod-identity.json
 }
 
 resource "aws_iam_role_policy_attachment" "eks-opencost-spot-datafeed-read" {

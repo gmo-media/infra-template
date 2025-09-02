@@ -32,18 +32,7 @@ resource "aws_eks_pod_identity_association" "victoria-logs" {
 
 resource "aws_iam_role" "victoria-logs" {
   name               = "${local.name}-victoria-logs"
-  assume_role_policy = data.aws_iam_policy_document.victoria-logs-assume-role.json
-}
-
-data "aws_iam_policy_document" "victoria-logs-assume-role" {
-  statement {
-    effect = "Allow"
-    principals {
-      type        = "Service"
-      identifiers = ["pods.eks.amazonaws.com"]
-    }
-    actions = ["sts:AssumeRole", "sts:TagSession"]
-  }
+  assume_role_policy = data.aws_iam_policy_document.eks-pod-identity.json
 }
 
 resource "aws_iam_role_policy_attachment" "victoria-logs-archive" {

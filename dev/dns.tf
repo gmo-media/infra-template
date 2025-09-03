@@ -11,7 +11,11 @@ locals {
   alb-hosts = [
     # Add your hosts here to connect them to ALB
     # "cd",
+    # "appset-cd",
     # "whoami",
+    # "traefik",
+    # "monitor",
+    # "alertmanager",
     # ...
   ]
 }

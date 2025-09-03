@@ -5,8 +5,11 @@ module "vpc" {
   cidr = local.vpc_cidr
 
   azs             = local.azs
-  private_subnets = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 4, k + 2)]
   public_subnets  = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 4, k)]
+  private_subnets = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 4, k + 8)]
+
+  public_subnet_ipv6_prefixes  = [0, 2]
+  private_subnet_ipv6_prefixes = [1, 3]
 
   enable_nat_gateway = true
   single_nat_gateway = true
@@ -25,9 +28,6 @@ module "vpc" {
   # https://docs.aws.amazon.com/eks/latest/userguide/cni-ipv6.html
   public_subnet_assign_ipv6_address_on_creation  = true
   private_subnet_assign_ipv6_address_on_creation = true
-
-  public_subnet_ipv6_prefixes  = [0, 1]
-  private_subnet_ipv6_prefixes = [2, 3]
 
   private_subnet_tags = {
     "karpenter.sh/discovery" = local.name

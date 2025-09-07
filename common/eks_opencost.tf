@@ -4,9 +4,30 @@ resource "aws_iam_role" "eks-opencost" {
   assume_role_policy = data.aws_iam_policy_document.eks-pod-identity.json
 }
 
+resource "aws_iam_role_policy_attachment" "eks-opencost-describe-spot-price-history" {
+  role       = aws_iam_role.eks-opencost.name
+  policy_arn = aws_iam_policy.describe-spot-price-history.arn
+}
+
 resource "aws_iam_role_policy_attachment" "eks-opencost-spot-datafeed-read" {
   role       = aws_iam_role.eks-opencost.name
   policy_arn = aws_iam_policy.spot-datafeed-read.arn
+}
+
+# ---- IAM Policy for DescribeSpotPriceHistory
+resource "aws_iam_policy" "describe-spot-price-history" {
+  name   = "describe-spot-price-history"
+  policy = data.aws_iam_policy_document.describe-spot-price-history.json
+}
+
+data "aws_iam_policy_document" "describe-spot-price-history" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "ec2:DescribeSpotPriceHistory",
+    ]
+    resources = ["*"]
+  }
 }
 
 # ---- IAM Policy for reading datafeed bucket

@@ -21,6 +21,10 @@ module "eks" {
 
   # Required for addon IAM access
   enable_irsa = true
+
+  iam_role_additional_policies = {
+    AmazonEKSVPCResourceController = "arn:aws:iam::aws:policy/AmazonEKSVPCResourceController",
+  }
 }
 
 data "aws_iam_role" "tofu-apply" {

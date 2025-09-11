@@ -38,9 +38,7 @@
     // https://docs.renovatebot.com/modules/datasource/aws-eks-addon/
     {
       "customType": "regex",
-      "fileMatch": [
-        ".+"
-      ],
+      "managerFilePatterns": ["/.*\\.tf/"],
       "matchStrings": [
         // Example:
         // # ...:eksAddonsFilter={"addonName":"vpc-cni"}
@@ -53,9 +51,7 @@
     // https://docs.renovatebot.com/modules/datasource/aws-rds/
     {
       "customType": "regex",
-      "fileMatch": [
-        ".+"
-      ],
+      "managerFilePatterns": ["**.yaml"],
       "matchStrings": [
         ".*rdsFilter=(?<packageName>.+?)[ ]*\n[ ]*(?<depName>[a-zA-Z0-9-_:]*)[ ]*?:[ ]*?[\"|']?(?<currentValue>[.\\d]+)[\"|']?.*"
       ],

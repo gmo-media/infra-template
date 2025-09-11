@@ -48,6 +48,15 @@
       "datasourceTemplate": "aws-eks-addon",
       "versioningTemplate": "aws-eks-addon",
     },
+    // https://docs.renovatebot.com/modules/datasource/aws-rds/
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["**.yaml"],
+      "matchStrings": [
+        ".*rdsFilter=(?<packageName>.+?)[ ]*\n[ ]*(?<depName>[a-zA-Z0-9-_:]*)[ ]*?:[ ]*?[\"|']?(?<currentValue>[.\\d]+)[\"|']?.*"
+      ],
+      "datasourceTemplate": "aws-rds",
+    },
     {
       "description": "OCI image dependencies (full)",
       "fileMatch": [

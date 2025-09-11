@@ -58,6 +58,15 @@
       "datasourceTemplate": "aws-rds",
     },
     {
+      "description": "Update RDS",
+      "customType": "regex",
+      "managerFilePatterns": ["/.+\\.tf$/"],
+      "matchStrings": [
+        "\\s*#\\s*renovate:rdsFilter=(?<packageName>.+?) depName=(?<depName>.*) versioning=(?<versioning>.*)\\s*.*_version\\s*=\\s*\"(?<currentValue>.*)\""
+      ],
+      "datasourceTemplate": "aws-rds"
+    },
+    {
       "description": "OCI image dependencies (full)",
       "fileMatch": [
         ".+"

@@ -5,6 +5,12 @@ terraform {
     bucket = "your-tfstate-bucket"
     key    = "path/to/your/tofu.tfstate"
   }
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "6.13.0"
+    }
+  }
 }
 
 provider "aws" {

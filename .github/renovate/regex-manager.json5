@@ -21,52 +21,6 @@
       "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
     },
     {
-      "description": "eks versioning",
-      "fileMatch": [
-        ".+"
-      ],
-      "matchStrings": [
-        // Example: version: "1.33"
-        "# renovate:eks\n.*?\"(?<currentValue>.*)\"\n",
-      ],
-      "datasourceTemplate": "github-releases",
-      "depNameTemplate": "aws/eks-distro",
-      // Example: v1-33-eks-10 -> 1-33
-      "extractVersionTemplate": "^v(?<version>\\d+-\\d+)-eks-.*",
-      "versioningTemplate": "regex:^(?<major>\\d+)-(?<minor>\\d+)$",
-    },
-    // https://docs.renovatebot.com/modules/datasource/aws-eks-addon/
-    {
-      "customType": "regex",
-      "managerFilePatterns": ["/.*\\.tf/"],
-      "matchStrings": [
-        // Example:
-        // # ...:eksAddonsFilter={"addonName":"vpc-cni"}
-        // default = "v1.18.1-eksbuild.3"
-        ".*# renovate:eksAddonsFilter=(?<packageName>.*?)\n.*?[a-zA-Z0-9-_:]*[ ]*?[:|=][ ]*?[\"|']?(?<currentValue>[a-zA-Z0-9-_.]+)[\"|']?.*"
-      ],
-      "datasourceTemplate": "aws-eks-addon",
-      "versioningTemplate": "aws-eks-addon",
-    },
-    // https://docs.renovatebot.com/modules/datasource/aws-rds/
-    {
-      "customType": "regex",
-      "managerFilePatterns": ["**.yaml"],
-      "matchStrings": [
-        ".*rdsFilter=(?<packageName>.+?)[ ]*\n[ ]*(?<depName>[a-zA-Z0-9-_:]*)[ ]*?:[ ]*?[\"|']?(?<currentValue>[.\\d]+)[\"|']?.*"
-      ],
-      "datasourceTemplate": "aws-rds",
-    },
-    {
-      "description": "Update RDS",
-      "customType": "regex",
-      "managerFilePatterns": ["/.+\\.tf$/"],
-      "matchStrings": [
-        "\\s*#\\s*renovate:rdsFilter=(?<packageName>.+?) depName=(?<depName>.*) versioning=(?<versioning>.*)\\s*.*_version\\s*=\\s*\"(?<currentValue>.*)\""
-      ],
-      "datasourceTemplate": "aws-rds"
-    },
-    {
       "description": "OCI image dependencies (full)",
       "fileMatch": [
         ".+"
@@ -111,6 +65,52 @@
         "# renovate:github-url\n.*?https://github\\.com/(?<depName>[^/]+/[^/]+)/archive/(?<currentValue>[^/]+)\.zip",
       ],
       "datasourceTemplate": "github-releases",
+    },
+    {
+      "description": "eks versioning",
+      "fileMatch": [
+        ".+"
+      ],
+      "matchStrings": [
+        // Example: version: "1.33"
+        "# renovate:eks\n.*?\"(?<currentValue>.*)\"\n",
+      ],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "aws/eks-distro",
+      // Example: v1-33-eks-10 -> 1-33
+      "extractVersionTemplate": "^v(?<version>\\d+-\\d+)-eks-.*",
+      "versioningTemplate": "regex:^(?<major>\\d+)-(?<minor>\\d+)$",
+    },
+    // https://docs.renovatebot.com/modules/datasource/aws-eks-addon/
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/.*\\.tf/"],
+      "matchStrings": [
+        // Example:
+        // # ...:eksAddonsFilter={"addonName":"vpc-cni"}
+        // default = "v1.18.1-eksbuild.3"
+        ".*# renovate:eksAddonsFilter=(?<packageName>.*?)\n.*?[a-zA-Z0-9-_:]*[ ]*?[:|=][ ]*?[\"|']?(?<currentValue>[a-zA-Z0-9-_.]+)[\"|']?.*"
+      ],
+      "datasourceTemplate": "aws-eks-addon",
+      "versioningTemplate": "aws-eks-addon",
+    },
+    // https://docs.renovatebot.com/modules/datasource/aws-rds/
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["**.yaml"],
+      "matchStrings": [
+        ".*rdsFilter=(?<packageName>.+?)[ ]*\n[ ]*(?<depName>[a-zA-Z0-9-_:]*)[ ]*?:[ ]*?[\"|']?(?<currentValue>[.\\d]+)[\"|']?.*"
+      ],
+      "datasourceTemplate": "aws-rds",
+    },
+    {
+      "description": "Update RDS",
+      "customType": "regex",
+      "managerFilePatterns": ["/.+\\.tf$/"],
+      "matchStrings": [
+        "\\s*#\\s*renovate:rdsFilter=(?<packageName>.+?) depName=(?<depName>.*) versioning=(?<versioning>.*)\\s*.*_version\\s*=\\s*\"(?<currentValue>.*)\""
+      ],
+      "datasourceTemplate": "aws-rds"
     },
     {
       "customType": "regex",

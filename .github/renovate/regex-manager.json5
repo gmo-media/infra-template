@@ -111,6 +111,16 @@
         "# renovate:github-url\n.*?https://github\\.com/(?<depName>[^/]+/[^/]+)/archive/(?<currentValue>[^/]+)\.zip",
       ],
       "datasourceTemplate": "github-releases",
-    }
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [".opentofu-version"],
+      "matchStrings": [
+        "(?<currentValue>.*)",
+      ],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "opentofu/opentofu",
+      "extractVersionTemplate": "^v(?<version>.+)",
+    },
   ]
 }

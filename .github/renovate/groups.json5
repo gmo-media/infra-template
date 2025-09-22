@@ -1,0 +1,14 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "packageRules": [
+    {
+      "description": "AWS provider",
+      "groupName": "AWS provider",
+      "matchDatasources": ["terraform-provider"],
+      "matchPackageNames": ["hashicorp/aws"],
+      "group": {
+        "commitMessageTopic": "{{{groupName}}}"
+      }
+    },
+  ]
+}

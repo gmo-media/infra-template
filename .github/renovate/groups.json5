@@ -2,10 +2,18 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "packageRules": [
     {
+      "description": "Group by directory (default)",
+      "matchPackagePatterns": [".*"],
+      "additionalBranchPrefix": "{{#if (equals packageFileDir '')}}{{else}}{{{replace '/' '-' packageFileDir}}}-{{/if}}",
+      "commitMessagePrefix": "{{#if (equals packageFileDir '')}}{{else}}[{{{packageFileDir}}}]{{/if}}",
+    },
+    {
       "description": "AWS provider",
       "groupName": "AWS provider",
       "matchDatasources": ["terraform-provider"],
       "matchPackageNames": ["hashicorp/aws"],
+      "additionalBranchPrefix": "",
+      "commitMessagePrefix": null,
       "group": {
         "commitMessageTopic": "{{{groupName}}}"
       }

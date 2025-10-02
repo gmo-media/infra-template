@@ -15,8 +15,4 @@ permissions:
 
 jobs:
   ci:
-    uses: gmo-media/tofu-actions/.github/workflows/quickstart-ci.yaml@v4
-    with:
-      auth-mode: aws-oidc
-      aws-apply-role: arn:aws:iam::<aws-account-id>:role/tofu-apply
-      aws-plan-role: arn:aws:iam::<aws-account-id>:role/tofu-plan
+    uses: gmo-media/tofu-actions/.github/workflows/quickstart-ci.yaml@v5

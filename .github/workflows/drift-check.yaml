@@ -14,9 +14,6 @@ permissions:
 
 jobs:
   drift-check:
-    uses: gmo-media/tofu-actions/.github/workflows/quickstart-drift-check.yaml@v4
-    with:
-      auth-mode: aws-oidc
-      aws-role: arn:aws:iam::<aws-account-id>:role/tofu-plan
+    uses: gmo-media/tofu-actions/.github/workflows/quickstart-drift-check.yaml@v5
     secrets:
       drift-notify-webhook: "https://hooks.slack.com/services/..."

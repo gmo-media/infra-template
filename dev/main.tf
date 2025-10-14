@@ -27,6 +27,6 @@ locals {
 
   # See https://github.com/renovatebot/renovate/discussions/35132 for more details on this workaround
   # renovate:eks
-  eks_version_raw = "1-33"
+  eks_version_raw = "1-34"
   eks_version     = replace(local.eks_version_raw, "-", ".")
 }

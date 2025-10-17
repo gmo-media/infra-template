@@ -43,7 +43,7 @@ resource "aws_eks_addon" "eks-pod-identity-agent" {
   cluster_name = module.eks.cluster_name
   addon_name   = "eks-pod-identity-agent"
   # renovate:eksAddonsFilter={"region":"ap-northeast-1","default":true,"addonName":"eks-pod-identity-agent"}
-  addon_version = "v1.3.8-eksbuild.2"
+  addon_version = "v1.3.9-eksbuild.3"
 }
 
 resource "aws_eks_addon" "vpc-cni" {

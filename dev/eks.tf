@@ -46,17 +46,11 @@ resource "aws_eks_addon" "eks-pod-identity-agent" {
   addon_version = "v1.3.9-eksbuild.3"
 }
 
-data "aws_iam_role" "eks-cni-ipv6" {
-  name = "eks-cni-ipv6"
-}
-
 resource "aws_eks_addon" "vpc-cni" {
   cluster_name = module.eks.cluster_name
   addon_name   = "vpc-cni"
   # renovate:eksAddonsFilter={"region":"ap-northeast-1","default":true,"addonName":"vpc-cni"}
   addon_version = "v1.20.4-eksbuild.1"
-
-  service_account_role_arn = data.aws_iam_role.eks-cni-ipv6.arn
 }
 
 resource "aws_eks_addon" "coredns" {

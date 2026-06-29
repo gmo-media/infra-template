@@ -15,5 +15,13 @@ permissions:
 jobs:
   drift-check:
     uses: gmo-media/tofu-actions/.github/workflows/quickstart-drift-check.yaml@v5
+    # cloneしてきたら各変数とシークレットを設定する（github-tokenはなくても良い）
+    with:
+      workload-identity-provider: ${{ vars.WORKLOAD_IDENTITY_PROVIDER }}
+      service-account: ${{ vars.SERVICE_ACCOUNT }}
+      anthropic-vertex-project-id: ${{ vars.ANTHROPIC_VERTEX_PROJECT_ID }}
+      cloud-ml-region: ${{ vars.CLOUD_ML_REGION }}
+      anthropic-model: ${{ vars.ANTHROPIC_MODEL }}
     secrets:
-      drift-notify-webhook: "https://hooks.slack.com/services/..."
+      drift-notify-webhook: ${{ secrets.DRIFT_NOTIFY_WEBHOOK }} # infra-team-alert
+      github-token: ${{ secrets.GITHUB_TOKEN }}

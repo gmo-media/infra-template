@@ -15,4 +15,4 @@ permissions:
 
 jobs:
   ci:
-    uses: gmo-media/tofu-actions/.github/workflows/quickstart-ci.yaml@v5
+    uses: gmo-media/tofu-actions-private/.github/workflows/quickstart-ci.yaml@v5
